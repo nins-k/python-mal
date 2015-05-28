@@ -198,6 +198,10 @@ class Media(Base):
         synopsis_elt = item.parent
     
     utilities.extract_tags(synopsis_elt.find_all(u'h2'))
+
+    for item in synopsis_elt(["script", "style"]):
+      item.extract()
+    
     media_info[u'synopsis'] = synopsis_elt.text.strip()
 
     related_title = media_page.find(u'h2', text=u'Related ' + self.__class__.__name__)
